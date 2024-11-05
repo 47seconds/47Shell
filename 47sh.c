@@ -37,6 +37,8 @@ Summary Table for exec command family:
 
 #define INITIAL_SIZE 8
 #define SIZE_INCREAMENT 4
+#define USERNAME "user"
+#define SHELL_NAME "47sh"
 
 void freeCommand(char** command) {
     for(int i = 0; command[i] != NULL; i++) free(command[i]);
@@ -91,10 +93,10 @@ int main() {
     int state;
 
     char *prompt = getenv("USER");
-    if (!prompt) {
-        prompt = "user";
-    }
-    strcat(prompt, "@Wsh> ");
+    if (strcmp(USERNAME, "user") || !prompt) prompt = USERNAME;
+    strcat(prompt, "@");
+    strcat(prompt, SHELL_NAME);
+    strcat(prompt, "> ");
     
     while (1) {
         input = readline(prompt);
